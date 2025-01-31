@@ -1,0 +1,15 @@
+.form-container {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.form-container::after {
+  content: '';
+  position: absolute;
+  bottom: -69px;
+  left: 15%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 70px solid white;
+}
