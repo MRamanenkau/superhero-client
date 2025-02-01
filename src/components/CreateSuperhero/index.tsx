@@ -20,13 +20,33 @@ const AddSuperhero: React.FC = () => {
   const [superpower, setSuperpower] = useState<string>("");
   const [humility, setHumility] = useState<number>(5);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newHero: Superhero = { name, superpower, humility };
-    console.log("New Superhero:", newHero);
-    setName("");
-    setSuperpower("");
-    setHumility(5);
+
+    try {
+      const response = await fetch("http://localhost:3000/superhero", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newHero),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save superhero");
+      }
+
+      const savedHero = await response.json();
+      console.log("Hero saved:", savedHero);
+
+      setName("");
+      setSuperpower("");
+      setHumility(5);
+    } catch (error) {
+      console.error("Error saving superhero:", error);
+    }
   };
+
 
   return (
     <ThemeProvider theme={comic}>
