@@ -50,7 +50,7 @@ const AddSuperhero: React.FC = () => {
   return (
     <ThemeProvider theme={comic}>
       <Container maxWidth="sm" style={{ marginTop: "20px" }}>
-        <Paper elevation={0} className="form-container" style={{ padding: "20px", borderRadius: "16px"  }}>
+        <Paper elevation={0} className="form-container" style={{ padding: "20px", borderRadius: "16px" }}>
           <Typography variant="h5" gutterBottom>
             Add a New Superhero
           </Typography>
@@ -84,6 +84,7 @@ const AddSuperhero: React.FC = () => {
             onClick={handleSubmit}
             style={{ marginTop: "20px" }}
             fullWidth
+            disabled={!name || !superpower}
           >
             Add Superhero
           </Button>

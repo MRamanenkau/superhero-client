@@ -7,7 +7,6 @@ const SuperheroList: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    console.log('isConnected', isConnected);
     if (isConnected) {
       fetchSuperheroes();
     }
@@ -20,7 +19,6 @@ const SuperheroList: React.FC = () => {
         onClick={() => setIsVisible(true)}
         aria-label="Open terminal"
       >
-        {/* The terminal icon is added via CSS background-image */}
       </button>
     );
   }

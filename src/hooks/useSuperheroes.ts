@@ -1,31 +1,30 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import useSocket from './useSoket';
 
 const useSuperheroes = () => {
-  const {socket, isConnected} = useSocket();
+  const { socket, isConnected } = useSocket();
   const [superheroes, setSuperheroes] = useState<any[]>([]);
+
+  const fetchSuperheroes = useCallback(
+    (sortBy = "humility", order = "desc") => {
+      if (socket && isConnected) {
+        socket.emit("getSuperheroes", { sortBy, order }, (responseData: any[]) => {
+          setSuperheroes(responseData);
+        });
+      }
+    },
+    [socket, isConnected]
+  );
 
   useEffect(() => {
     if (!socket) return;
 
-    const handleSuperheroesUpdate = (data: any[]) => {
-      setSuperheroes(data);
-    };
-
-    socket.on('superheroesUpdated', handleSuperheroesUpdate);
+    socket.on("superheroesUpdated", fetchSuperheroes);
 
     return () => {
-      socket.off('superheroesUpdated', handleSuperheroesUpdate);
+      socket.off("superheroesUpdated", fetchSuperheroes);
     };
-  }, [socket]);
-
-  const fetchSuperheroes = (sortBy = 'humility', order = 'desc') => {
-    if (socket && isConnected) {
-      socket.emit('getSuperheroes', {sortBy, order}, (responseData: any[]) => {
-        setSuperheroes(responseData);
-      });
-    }
-  };
+  }, [socket, fetchSuperheroes]);
 
   return { superheroes, fetchSuperheroes, isConnected };
 };
