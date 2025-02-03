@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import useSocket from '../../hooks/useSoket';
+import useSuperheroes from '../../hooks/useSuperheroes';
 import './style.css';
 
 const SuperheroList: React.FC = () => {
-  const { superheroes, fetchSuperheroes } = useSocket();
+  const { superheroes, fetchSuperheroes, isConnected } = useSuperheroes();
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    fetchSuperheroes();
-  }, []);
+    console.log('isConnected', isConnected);
+    if (isConnected) {
+      fetchSuperheroes();
+    }
+  }, [isConnected]);
 
   if (!isVisible) {
     return (

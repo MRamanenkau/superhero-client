@@ -1,33 +1,32 @@
 import { useState, useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-const SOCKET_SERVER_URL = 'localhost:4321';
+const SOCKET_SERVER_URL = 'http://localhost:4321';
 
 const useSocket = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [superheroes, setSuperheroes] = useState<any[]>([]);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const socketInstance = io(SOCKET_SERVER_URL, {transports: ['websocket']});
-    setSocket(socketInstance);
+    const socketInstance = io(SOCKET_SERVER_URL, { transports: ['websocket'] });
 
-    socketInstance.on('superheroesUpdated', (data) => {
-      setSuperheroes(data);
+    socketInstance.on('connect', () => {
+      setIsConnected(true);
     });
 
+    socketInstance.on('disconnect', () => {
+      setIsConnected(false);
+    });
+
+    setSocket(socketInstance);
 
     return () => {
       socketInstance.disconnect();
+      setIsConnected(false);
     };
   }, []);
 
-  const fetchSuperheroes = (sortBy = 'humility', order = 'desc') => {
-    if (socket) {
-      socket.emit('getSuperheroes', { sortBy: 'humility', order: 'desc' });
-    }
-  };
-
-  return { superheroes, fetchSuperheroes };
+  return { socket, isConnected };
 };
 
 export default useSocket;
