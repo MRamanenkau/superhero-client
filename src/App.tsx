@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import CreateSuperhero from "./components/CreateSuperhero";
+import SuperheroList from "./components/SuperheroList";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       alignItems: "center",
     }}>
       <CreateSuperhero/>
+      <SuperheroList />
     </div>
   );
 }

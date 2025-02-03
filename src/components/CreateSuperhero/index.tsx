@@ -47,7 +47,6 @@ const AddSuperhero: React.FC = () => {
     }
   };
 
-
   return (
     <ThemeProvider theme={comic}>
       <Container maxWidth="sm" style={{ marginTop: "20px" }}>

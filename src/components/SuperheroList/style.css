@@ -1,0 +1,89 @@
+/* Position the console overlay fixed to the right side */
+.console-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+/* Styling for the console container */
+.console {
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  height: 100%;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* Header styling with the close button */
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Close button styling */
+.close-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #ff0000;
+}
+
+/* Heading styling */
+h2 {
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* List styling */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px;
+  border-bottom: 1px solid #444;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.terminal-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  background-image: url('../../../public/terminal_icon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 120%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background-color 0.2s ease;
+}
+
+.terminal-icon:hover {
+  background-color: #FDB710;
+}
